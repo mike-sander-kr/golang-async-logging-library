@@ -25,11 +25,14 @@ type Alog struct {
 // New creates a new Alog object that writes to the provided io.Writer.
 // If nil is provided the output will be directed to os.Stdout.
 func New(w io.Writer) *Alog {
+
 	if w == nil {
 		w = os.Stdout
 	}
 	return &Alog{
-		dest: w,
+		dest: w,,
+		msgCh: "",
+		errorCh: "",
 	}
 }
 
@@ -54,7 +57,7 @@ func (al Alog) shutdown() {
 
 // MessageChannel returns a channel that accepts messages that should be written to the log.
 func (al Alog) MessageChannel() chan string {
-	return nil
+	return al.msgCh
 }
 
 // ErrorChannel returns a channel that will be populated when an error is raised during a write operation.
