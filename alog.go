@@ -30,8 +30,8 @@ func New(w io.Writer) *Alog {
 		w = os.Stdout
 	}
 	return &Alog{
-		dest: w,,
-		msgCh: "",
+		dest:    w,
+		msgCh:   "",
 		errorCh: "",
 	}
 }
